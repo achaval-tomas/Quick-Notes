@@ -38,9 +38,9 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
               if (!context.mounted) return;
               Navigator.of(context).pushNamedAndRemoveUntil(
                 registerRoute,
-                (route) => false
+                (_) => false
               );
-              
+
             },
             child: const Text('Go Back'),
           )
