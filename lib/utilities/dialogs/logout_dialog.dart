@@ -12,5 +12,5 @@ Future<bool> showLogOutDialog(
       'Cancel': false,
       'Log Out': true
     },
-  ).then((value) => value == false);
+  ).then((value) => value ?? false);
 }
