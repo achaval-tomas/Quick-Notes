@@ -46,42 +46,58 @@ class _LoginViewState extends State<LoginView> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Log In'),
+          centerTitle: true,
         ),
-        body: Column(
-          children: [
-            TextField(
-              controller: _email,
-              enableSuggestions: false,
-              autocorrect: false,
-              keyboardType: TextInputType.emailAddress,
-              decoration:
-                  const InputDecoration(hintText: 'myemail@example.com'),
-            ),
-            TextField(
-              controller: _password,
-              obscureText: true,
-              enableSuggestions: false,
-              autocorrect: false,
-              decoration:
-                  const InputDecoration(hintText: 'Enter your password'),
-            ),
-            TextButton(
-              onPressed: () async {
-                final email = _email.text;
-                final password = _password.text;
-                context.read<AuthBloc>()
-                      .add(AuthEventLogIn(email, password));
-              },
-              child: const Text('Log In')
-            ),
-            TextButton(
-              onPressed: () {
-                context.read<AuthBloc>()
-                        .add(const AuthEventShouldRegister());
-              },
-              child: const Text("Don't have an account? Register here!"),
-            )
-          ],
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                'Please log in to your account in order to interact with and create notes!',
+                textAlign: TextAlign.center,
+              ),
+              TextField(
+                controller: _email,
+                enableSuggestions: false,
+                autocorrect: false,
+                keyboardType: TextInputType.emailAddress,
+                decoration:
+                    const InputDecoration(hintText: 'myemail@example.com'),
+              ),
+              TextField(
+                controller: _password,
+                obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
+                decoration:
+                    const InputDecoration(hintText: 'Enter your password'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  final email = _email.text;
+                  final password = _password.text;
+                  context.read<AuthBloc>()
+                        .add(AuthEventLogIn(email, password));
+                },
+                child: const Text('Log In')
+              ),
+              TextButton(
+                onPressed: () {
+                  context.read<AuthBloc>()
+                          .add(const AuthEventForgotPassword());
+                },
+                child: const Text("I forgot my password"),
+              ),
+              TextButton(
+                onPressed: () {
+                  context.read<AuthBloc>()
+                          .add(const AuthEventShouldRegister());
+                },
+                child: const Text("Don't have an account? Register here!"),
+              )
+            ],
+          ),
         ),
       ),
     );
