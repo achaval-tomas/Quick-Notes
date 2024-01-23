@@ -4,7 +4,8 @@ import 'package:mynotes/services/auth/bloc/auth_event.dart';
 import 'package:mynotes/services/auth/bloc/auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState>{
-  AuthBloc(AuthProvider provider) : super(const AuthStateUninitialized()) {
+  AuthBloc(AuthProvider provider)
+      : super(const AuthStateUninitialized(isLoading: true)) {
     // VERIFY EMAIL
     on<AuthEventSendEmailVerification>(
       (event, emit) async {
@@ -25,9 +26,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>{
             )
           );
         } else if (!user.isEmailVerified){
-          emit(const AuthStateNeedsVerification());
+          emit(const AuthStateNeedsVerification(isLoading: false));
         } else {
-          emit(AuthStateLoggedIn(user));
+          emit(AuthStateLoggedIn(user: user, isLoading: false));
         }
       }
     );
@@ -42,15 +43,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>{
             password: password
           );
           await provider.sendEmailVerification();
-          emit(const AuthStateNeedsVerification());
+          emit(const AuthStateNeedsVerification(isLoading: false));
         } on Exception catch (e) {
-          emit(AuthStateRegistering(e));
+          emit(AuthStateRegistering(exception: e, isLoading: false));
         }
       }
     );
     on<AuthEventShouldRegister>(
       (event, emit) {
-        emit(const AuthStateRegistering(null));
+        emit(const AuthStateRegistering(exception: null, isLoading: false));
       }
     );
     // LOG IN
@@ -59,7 +60,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>{
         emit(
           const AuthStateLoggedOut(
             exception: null,
-            isLoading: true
+            isLoading: true,
+            loadingText: 'Please wait as we log you in.'
           )
         );
         final email = event.email;
@@ -75,10 +77,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>{
               isLoading: false
             )
           );
-          if (!user.isEmailVerified){
-            emit(const AuthStateNeedsVerification());
+          if (!(user.isEmailVerified)){
+            emit(const AuthStateNeedsVerification(isLoading: false));
           } else {
-            emit(AuthStateLoggedIn(user));
+            emit(AuthStateLoggedIn(user: user, isLoading: false));
           }
         } on Exception catch (e) {
           emit(
