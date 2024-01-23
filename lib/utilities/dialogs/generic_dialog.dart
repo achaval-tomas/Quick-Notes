@@ -20,6 +20,9 @@ Future<T?> showGenericDialog<T>({
           .map((optionTitle) {
             final T value = options[optionTitle];
             return TextButton(
+              style: const ButtonStyle(
+                foregroundColor: MaterialStatePropertyAll(Colors.black)
+              ),
               onPressed: () {
                 if (value != null) {
                   Navigator.of(context).pop(value);

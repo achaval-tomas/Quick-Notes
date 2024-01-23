@@ -45,18 +45,20 @@ class _LoginViewState extends State<LoginView> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Log In'),
+          title: const Text('Quick Notes'),
           centerTitle: true,
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
                 'Please log in to your account in order to interact with and create notes!',
                 textAlign: TextAlign.center,
               ),
+              const SizedBox(height: 20),
               TextField(
                 controller: _email,
                 enableSuggestions: false,
