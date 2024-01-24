@@ -62,4 +62,15 @@ class FirebaseCloudStorage {
     }
   }
 
+  Future<void> deleteAllNotes({required String ownerUserId}) async {
+    try {
+      final allnotes = await getNotes(ownerUserId: ownerUserId);
+      for (var n in allnotes){
+        deleteNote(documentId: n.documentId);
+      }
+    } catch (e) {
+      throw CouldNotDeleteNoteException();
+    }
+  }
+
 }

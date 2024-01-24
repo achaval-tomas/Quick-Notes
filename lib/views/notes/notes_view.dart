@@ -7,6 +7,7 @@ import 'package:mynotes/services/auth/bloc/auth_bloc.dart';
 import 'package:mynotes/services/auth/bloc/auth_event.dart';
 import 'package:mynotes/services/cloud/cloud_note.dart';
 import 'package:mynotes/services/cloud/firebase_cloud_storage.dart';
+import 'package:mynotes/utilities/dialogs/delete_all_notes_dialog.dart';
 import 'package:mynotes/utilities/dialogs/logout_dialog.dart';
 import 'package:mynotes/views/notes/notes_list_view.dart';
 
@@ -49,11 +50,21 @@ class _NotesViewState extends State<NotesView> {
                     if (!context.mounted) return;
                     context.read<AuthBloc>().add(const AuthEventLogOut());
                   }
-                break;
+                  break;
+                case MenuAction.deleteAllNotes:
+                  final shouldEmptyNotes = await showDeleteAllNotesDialog(context);
+                  if (shouldEmptyNotes) {
+                    _notesService.deleteAllNotes(ownerUserId: userId);
+                  }
+                  break;
               }
             },
             itemBuilder: (context) {
               return const [
+                PopupMenuItem<MenuAction>(
+                  value: MenuAction.deleteAllNotes,
+                  child: Text('Delete All Notes'),
+                ),
                 PopupMenuItem<MenuAction>(
                   value: MenuAction.logout,
                   child: Text('Log Out'),
