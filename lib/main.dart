@@ -19,6 +19,7 @@ void main() {
   runApp(MaterialApp(
     title: 'Flutter Demo',
     theme: mytheme,
+    debugShowCheckedModeBanner: false,
     home: BlocProvider<AuthBloc>(
       create: (context) => AuthBloc(FirebaseAuthProvider()),
       child: const HomePage(),
