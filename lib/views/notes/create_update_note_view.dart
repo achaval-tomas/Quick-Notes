@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mynotes/extensions/buildcontext/loc.dart';
 import 'package:mynotes/services/auth/auth_service.dart';
 import 'package:mynotes/utilities/dialogs/cannot_share_empty_note_dialog.dart';
 import 'package:mynotes/utilities/generics/get_arguments.dart';
@@ -91,7 +92,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('New note'),
+        title: Text(context.loc.note),
         actions: [
           IconButton(
             onPressed: () async {
@@ -117,8 +118,8 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
                 keyboardType: TextInputType.multiline,
                 autofocus: true,
                 maxLines: null,
-                decoration: const InputDecoration(
-                  hintText: 'Start typing your note...'
+                decoration: InputDecoration(
+                  hintText: context.loc.start_typing_your_note
                 ) 
               );
             default:

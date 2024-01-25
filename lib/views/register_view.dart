@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mynotes/extensions/buildcontext/loc.dart';
 import 'package:mynotes/services/auth/auth_exceptions.dart';
 import 'package:mynotes/services/auth/bloc/auth_bloc.dart';
 import 'package:mynotes/services/auth/bloc/auth_event.dart';
@@ -37,65 +38,67 @@ class _RegisterViewState extends State<RegisterView> {
       listener: (context, state) async {
         if (state is AuthStateRegistering){
           if (state.exception is WeakPasswordAuthException){
-            await showErrorDialog(context, 'Password too weak.');
+            await showErrorDialog(context, context.loc.register_error_weak_password);
           } else if (state.exception is EmailAlreadyInUseAuthException){
-            await showErrorDialog(context, 'This email is already in use.');
+            await showErrorDialog(context, context.loc.register_error_email_already_in_use);
           } else if (state.exception is GenericAuthException){
-            await showErrorDialog(context, 'Failed to register.');
+            await showErrorDialog(context, context.loc.register_error_generic);
           } else if (state.exception is InvalidEmailAuthException){
-            await showErrorDialog(context, 'Invalid email format.');
+            await showErrorDialog(context, context.loc.register_error_invalid_email);
           }
         }
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Register'),
+          title: Text(context.loc.register),
           centerTitle: true,
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text('Enter an email and password to create an account!'),
-              TextField(
-                controller: _email,
-                enableSuggestions: false,
-                autocorrect: false,
-                autofocus: true,
-                keyboardType: TextInputType.emailAddress,
-                decoration:
-                    const InputDecoration(hintText: 'myemail@example.com'),
-              ),
-              TextField(
-                controller: _password,
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                decoration:
-                    const InputDecoration(hintText: 'Enter your password'),
-              ),
-              TextButton(
-                  onPressed: () async {
-                    final email = _email.text;
-                    final password = _password.text;
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(context.loc.register_view_prompt, textAlign: TextAlign.center),
+                TextField(
+                  controller: _email,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  autofocus: true,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration:
+                      InputDecoration(hintText: context.loc.email_text_field_placeholder),
+                ),
+                TextField(
+                  controller: _password,
+                  obscureText: true,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  decoration:
+                      InputDecoration(hintText: context.loc.password_text_field_placeholder),
+                ),
+                TextButton(
+                    onPressed: () async {
+                      final email = _email.text;
+                      final password = _password.text;
+                      context.read<AuthBloc>().add(
+                        AuthEventRegister(
+                          email,
+                          password
+                        )
+                      );
+                    },
+                    child: Text(context.loc.register)),
+                TextButton(
+                  onPressed: () {
                     context.read<AuthBloc>().add(
-                      AuthEventRegister(
-                        email,
-                        password
-                      )
+                        const AuthEventLogOut()
                     );
                   },
-                  child: const Text('Register')),
-              TextButton(
-                onPressed: () {
-                  context.read<AuthBloc>().add(
-                      const AuthEventLogOut()
-                  );
-                },
-                child: const Text('Already have an account? Log In!'),
-              )
-            ],
+                  child: Text(context.loc.register_view_already_registered),
+                )
+              ],
+            ),
           ),
         ),
       ),

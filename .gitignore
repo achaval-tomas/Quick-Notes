@@ -11,6 +11,7 @@
 migrate_working_dir/
 
 key.properties
+lib/firebase_options.dart
 
 # IntelliJ related
 *.iml
