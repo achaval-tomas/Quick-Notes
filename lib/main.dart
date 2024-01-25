@@ -17,7 +17,7 @@ import 'package:mynotes/views/verify_email_view.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MaterialApp(
-    title: 'Flutter Demo',
+    title: 'Quick Notes',
     theme: mytheme,
     debugShowCheckedModeBanner: false,
     home: BlocProvider<AuthBloc>(
