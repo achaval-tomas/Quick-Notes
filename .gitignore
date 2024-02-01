@@ -12,7 +12,12 @@ migrate_working_dir/
 
 key.properties
 /lib/firebase_options.dart
-/android/app/google-services.json
+/android/*
+/ios/*
+/linux/*
+/macos/*
+/web/*
+/windows/*
 
 # IntelliJ related
 *.iml
