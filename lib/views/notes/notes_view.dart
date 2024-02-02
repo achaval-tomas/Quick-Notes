@@ -38,6 +38,7 @@ class _NotesViewState extends State<NotesView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const Icon(Icons.notes),
         title: StreamBuilder(
           stream: _notesService.allNotes(ownerUserId: userId).getLength,
           builder: (context, AsyncSnapshot<int> snapshot) {
@@ -46,17 +47,11 @@ class _NotesViewState extends State<NotesView> {
               final text = context.loc.notes_title(noteCount);
               return Text(text);
             } else {
-              return const Text('Your Notes');
+              return const Text('...');
             }
           }
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(createOrUpdateNoteRoute);
-            },
-            icon: const Icon(Icons.add),
-          ),
           PopupMenuButton<MenuAction>(
             onSelected: (value) async {
               switch (value) {
@@ -117,7 +112,14 @@ class _NotesViewState extends State<NotesView> {
               return const Center(child: CircularProgressIndicator());
           }
         },
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed(createOrUpdateNoteRoute);
+        },
+        backgroundColor: Colors.orange,
+        child: const Icon(Icons.edit_note_outlined),
+      ),
     );
   }
 }
