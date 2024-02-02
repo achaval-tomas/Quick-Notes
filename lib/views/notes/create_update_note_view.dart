@@ -42,14 +42,15 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
 
   void _deleteNoteIfTextIsEmpty() {
     final note = _note;
-    if (_textController.text.isEmpty && note != null){
+    final text = _textController.text.trimLeft();
+    if (text.isEmpty && note != null){
       _notesService.deleteNote(documentId: note.documentId);
     }
   }
 
   void _saveNoteIfTextNotEmpty() async {
     final note = _note;
-    final text = _textController.text;
+    final text = _textController.text.trimLeft();
     if (note != null && text.isNotEmpty){
       await _notesService.updateNote(
         documentId: note.documentId,
@@ -61,7 +62,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
   void _textControllerListener() async {
     final note = _note;
     if (note == null) return;
-    final text = _textController.text;
+    final text = _textController.text.trimLeft();
     await _notesService.updateNote(
       documentId: note.documentId,
       text: text
@@ -95,8 +96,14 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
         title: Text(context.loc.note),
         actions: [
           IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            }, 
+            icon: const Icon(Icons.cloud_upload_outlined)
+          ),
+          IconButton(
             onPressed: () async {
-              final text = _textController.text;
+              final text = _textController.text.trimLeft();
               if (_note == null || text.isEmpty) {
                 await showCannotShareEmptyNoteDialog(context);
               } else {

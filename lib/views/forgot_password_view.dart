@@ -68,7 +68,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                 ),
                 TextButton(
                   onPressed:() {
-                    final email = _controller.text;
+                    final email = _controller.text.trim();
                     context.read<AuthBloc>()
                             .add(AuthEventForgotPassword(email: email));
                   },

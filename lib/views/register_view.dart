@@ -79,7 +79,7 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
                 TextButton(
                     onPressed: () async {
-                      final email = _email.text;
+                      final email = _email.text.trim();
                       final password = _password.text;
                       context.read<AuthBloc>().add(
                         AuthEventRegister(
