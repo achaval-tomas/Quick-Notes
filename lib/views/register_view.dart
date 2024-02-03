@@ -50,7 +50,7 @@ class _RegisterViewState extends State<RegisterView> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(context.loc.register),
+          title: Text(context.loc.create_user),
           centerTitle: true,
         ),
         body: Padding(
