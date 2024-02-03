@@ -17,8 +17,14 @@
     "register": "Registrarme",
     "restart": "Volver",
     "generic_loading_text": "Espera un momento...",
+    
+    "sort_by": "Ordenar por",
+    "sort_by_title": "Cómo deseas ordenar tus notas?",
+    "sort_by_creation": "Fecha de Creación",
+    "sort_by_last_access": "Último Acceso",
 
-    "last_access": "Último Acceso:",
+    "last_access": "Último Acceso",
+    "created_at": "Creada el",
 
     "start_typing_your_note": "Comienza a escribir tu nota...",
     "delete_note_prompt": "Estas seguro de que deseas eliminar esta nota?",

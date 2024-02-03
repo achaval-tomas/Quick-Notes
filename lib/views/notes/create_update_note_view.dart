@@ -54,7 +54,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
     final text = _textController.text.trimLeft();
     if (note != null && text.isNotEmpty){
       await _notesService.updateNote(
-        documentId: note.documentId,
+        note: note,
         text: text
       );
     }
@@ -118,7 +118,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
       body: FutureBuilder(
         future: createOrGetExistingNote(context),
         builder:(context, snapshot) {
-          String time = getDate(_note?.text);
+          String time = getCreationDate(_note?.text);
           switch (snapshot.connectionState){
             case ConnectionState.done:
              // _setupTextControllerListener();
@@ -126,7 +126,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
                 padding: const EdgeInsets.all(12.0),
                 child: Column(
                   children: [
-                    Text('${context.loc.last_access} $time'),
+                    Text('${context.loc.created_at} $time'),
                     TextField(
                       controller: _textController,
                       keyboardType: TextInputType.multiline,

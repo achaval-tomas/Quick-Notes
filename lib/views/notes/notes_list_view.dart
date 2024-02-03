@@ -9,18 +9,20 @@ class NotesListView extends StatelessWidget {
   final List<CloudNote> notes;
   final NoteCallback onDeleteNote;
   final NoteCallback onTap;
+  final String Function(String) sortFunc;
 
   const NotesListView({
     super.key,
     required this.notes,
     required this.onDeleteNote,
-    required this.onTap
+    required this.onTap,
+    required this.sortFunc,
   });
 
   void sortNotes(List<CloudNote> notes){
     notes.sort(
       (a, b){
-        return -getDate(a.text).compareTo(getDate(b.text));
+        return -sortFunc(a.text).compareTo(sortFunc(b.text));
       }
     );
   }
@@ -46,7 +48,7 @@ class NotesListView extends StatelessWidget {
                   overflow: TextOverflow.ellipsis
                 ),
                 subtitle: Text(
-                  getDate(note.text),
+                  sortFunc(note.text),
                   maxLines: 1,
                   softWrap: true,
                   style: TextStyle(color: Colors.grey.shade600),

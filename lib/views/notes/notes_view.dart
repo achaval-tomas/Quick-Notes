@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show ReadContext;
+import 'package:mynotes/constants/regex.dart';
 import 'package:mynotes/constants/routes.dart';
 import 'package:mynotes/enums/menu_action.dart';
 import 'package:mynotes/extensions/buildcontext/loc.dart';
@@ -10,6 +11,7 @@ import 'package:mynotes/services/cloud/cloud_note.dart';
 import 'package:mynotes/services/cloud/firebase_cloud_storage.dart';
 import 'package:mynotes/utilities/dialogs/delete_all_notes_dialog.dart';
 import 'package:mynotes/utilities/dialogs/logout_dialog.dart';
+import 'package:mynotes/utilities/dialogs/sort_by_options_dialog.dart';
 import 'package:mynotes/views/notes/notes_list_view.dart';
 
 extension Count<T extends Iterable> on Stream<T>{
@@ -27,6 +29,8 @@ class _NotesViewState extends State<NotesView> {
 
   late final FirebaseCloudStorage _notesService;
   String get userId => AuthService.firebase().currentUser!.id;
+
+  String Function(String) sortFunc = getCreationDate;
 
   @override
   void initState() {
@@ -55,6 +59,17 @@ class _NotesViewState extends State<NotesView> {
           PopupMenuButton<MenuAction>(
             onSelected: (value) async {
               switch (value) {
+                case MenuAction.sortBy:
+                  final lastAccess = await showSortByDialog(context);
+                  if (lastAccess != null) {
+                    if (lastAccess) {
+                      sortFunc = getLastAccessDate;
+                    } else {
+                      sortFunc = getCreationDate;
+                    }
+                    setState(() {});
+                  }
+                  break;  
                 case MenuAction.logout:
                   final shouldLogout = await showLogOutDialog(context);
                   if (shouldLogout) {
@@ -72,6 +87,10 @@ class _NotesViewState extends State<NotesView> {
             },
             itemBuilder: (context) {
               return [
+                PopupMenuItem<MenuAction>(
+                  value: MenuAction.sortBy,
+                  child: Text(context.loc.sort_by),
+                ),
                 PopupMenuItem<MenuAction>(
                   value: MenuAction.deleteAllNotes,
                   child: Text(context.loc.delete_all),
@@ -104,6 +123,7 @@ class _NotesViewState extends State<NotesView> {
                       arguments: note,
                     );
                   },
+                  sortFunc: sortFunc,
                 );
               } else {
                 return const Center(child: CircularProgressIndicator());

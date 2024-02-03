@@ -3,18 +3,35 @@ import 'package:intl/intl.dart' show DateFormat;
 const dateRegEx = '!!!!!';
 
 String getContent(String? note){
-  if (note != null){
-    final text = note.split(dateRegEx);
-    if (text.length < 2) return text[0];
-    return text[1];
+  if (note != null) {
+    if (note.length >= 32){
+      final text = note.substring(32, note.length);
+      return text;
+    }
   }
   return '';
 }
 
-String getDate(String? note){
-   if (note != null){
-    final text = note.split(dateRegEx);
-    if (text.length > 1) return text[0];
+String updateDate(){
+  return DateFormat('yyyy/MM/dd kk:mm').format(DateTime.now());
+}
+
+String getLastAccessDate(String? note){
+  if (note != null) {
+    if (note.length >= 32){
+      final text = note.substring(16, 32);
+      return text;
+    }
   }
-  return DateFormat('yyyy/MM/dd kk:mm$dateRegEx').format(DateTime.now());
+  return DateFormat('yyyy/MM/dd kk:mm').format(DateTime.now());
+}
+
+String getCreationDate(String? note){
+   if (note != null) {
+    if (note.length >= 16){
+      final text = note.substring(0, 16);
+      return text;
+    }
+  }
+  return DateFormat('yyyy/MM/dd kk:mm').format(DateTime.now());
 }

@@ -12,14 +12,14 @@ class FirebaseCloudStorage {
       FirebaseCloudStorage._sharedInstance();
   factory FirebaseCloudStorage() => _shared;
 
-  String _updateNoteTime(String note){
-    final time = getDate(null);
-    final text = getContent(note);
-    return time + text;
+  String _updateNoteTime(CloudNote? note, String content){
+    final createdAt = getCreationDate(note?.text);
+    final currentDate = updateDate();
+    return createdAt + currentDate + content;
   }
 
   Future<CloudNote> createNewNote({required String ownerUserId}) async {
-    final text = _updateNoteTime('');
+    final text = _updateNoteTime(null, '');
     final document = await notes.add({
       ownerUserIdFieldName: ownerUserId,
       textFieldName: text,
@@ -52,11 +52,11 @@ class FirebaseCloudStorage {
           .map((doc) => CloudNote.fromSnapshot(doc)));
 
   Future<void> updateNote({
-    required String documentId,
+    required CloudNote note,
     required String text,
   }) async {
     try {
-      await notes.doc(documentId).update({textFieldName: _updateNoteTime(text)});
+      await notes.doc(note.documentId).update({textFieldName: _updateNoteTime(note, text)});
     } catch (e) {
       throw CouldNotUpdateNoteException();
     }
