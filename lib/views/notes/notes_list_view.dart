@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mynotes/constants/regex.dart';
-import 'package:mynotes/extensions/buildcontext/loc.dart';
 import 'package:mynotes/services/cloud/cloud_note.dart';
 import 'package:mynotes/utilities/dialogs/delete_dialog.dart';
 
@@ -31,43 +30,42 @@ class NotesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     sortNotes(notes);
-    String sortText = (sortFunc == getCreationDate) ? context.loc.created_at : context.loc.last_access;
     return ListView.builder(
       itemCount: notes.length,
       itemBuilder: (context, index) {
         final note = notes[index];
         return Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: ListTile(
-                onTap: () {
-                  onTap(note);
-                },
-                title: Text(
-                  getContent(note.text),
-                  maxLines: 1,
-                  softWrap: true,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                  overflow: TextOverflow.ellipsis
-                ),
-                subtitle: Text(
-                  '$sortText ${sortFunc(note.text)}',
-                  maxLines: 1,
-                  softWrap: true,
-                  style: const TextStyle(color: Colors.white24),
-                  overflow: TextOverflow.ellipsis
-                ),
-                tileColor: Colors.grey.shade900,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                trailing: IconButton(
-                  onPressed: () async {
-                    final shouldDelete = await showDeleteDialog(context);
-                    if (shouldDelete) {
-                      onDeleteNote(note);
-                    }
-                  },
-                  icon: const Icon(Icons.delete)
-                ),
-              ),
+          padding: const EdgeInsets.all(4.0),
+          child: ListTile(
+            onTap: () {
+              onTap(note);
+            },
+            title: Text(
+              getContent(note.text),
+              maxLines: 1,
+              softWrap: true,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+              overflow: TextOverflow.ellipsis
+            ),
+            subtitle: Text(
+              sortFunc(note.text),
+              maxLines: 1,
+              softWrap: true,
+              style: const TextStyle(color: Colors.white24),
+              overflow: TextOverflow.ellipsis
+            ),
+            tileColor: Colors.grey.shade900,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            trailing: IconButton(
+              onPressed: () async {
+                final shouldDelete = await showDeleteDialog(context);
+                if (shouldDelete) {
+                  onDeleteNote(note);
+                }
+              },
+              icon: const Icon(Icons.delete)
+            ),
+          ),
         );
       },
     );
