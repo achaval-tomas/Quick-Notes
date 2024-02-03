@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mynotes/constants/regex.dart';
+import 'package:mynotes/extensions/buildcontext/loc.dart';
 import 'package:mynotes/services/cloud/cloud_note.dart';
 import 'package:mynotes/utilities/dialogs/delete_dialog.dart';
 
@@ -30,6 +31,7 @@ class NotesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     sortNotes(notes);
+    String sortText = (sortFunc == getCreationDate) ? context.loc.created_at : context.loc.last_access;
     return ListView.builder(
       itemCount: notes.length,
       itemBuilder: (context, index) {
@@ -48,10 +50,10 @@ class NotesListView extends StatelessWidget {
                   overflow: TextOverflow.ellipsis
                 ),
                 subtitle: Text(
-                  sortFunc(note.text),
+                  '$sortText ${sortFunc(note.text)}',
                   maxLines: 1,
                   softWrap: true,
-                  style: TextStyle(color: Colors.grey.shade600),
+                  style: const TextStyle(color: Colors.white24),
                   overflow: TextOverflow.ellipsis
                 ),
                 tileColor: Colors.grey.shade900,

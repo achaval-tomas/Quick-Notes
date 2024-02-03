@@ -87,7 +87,7 @@ class _NotesViewState extends State<NotesView> {
             },
             itemBuilder: (context) {
               return [
-                PopupMenuItem<MenuAction>(
+                 PopupMenuItem<MenuAction>(
                   value: MenuAction.sortBy,
                   child: Text(context.loc.sort_by),
                 ),
