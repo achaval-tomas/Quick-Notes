@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mynotes/constants/regex.dart';
 import 'package:mynotes/extensions/buildcontext/loc.dart';
 import 'package:mynotes/services/auth/auth_service.dart';
 import 'package:mynotes/utilities/dialogs/cannot_share_empty_note_dialog.dart';
@@ -26,7 +27,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
     final widgetNote = context.getArgument<CloudNote>();
     if (widgetNote != null) {
       _note = widgetNote;
-      _textController.text = widgetNote.text;
+      _textController.text = getContent(widgetNote.text);
       return widgetNote;
     }
 
@@ -99,7 +100,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
             onPressed: () {
               Navigator.pop(context);
             }, 
-            icon: const Icon(Icons.cloud_upload_outlined)
+            icon: const Icon(Icons.done)
           ),
           IconButton(
             onPressed: () async {
@@ -117,19 +118,25 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
       body: FutureBuilder(
         future: createOrGetExistingNote(context),
         builder:(context, snapshot) {
+          String time = getDate(_note?.text);
           switch (snapshot.connectionState){
             case ConnectionState.done:
               _setupTextControllerListener();
               return Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: TextField(
-                  controller: _textController,
-                  keyboardType: TextInputType.multiline,
-                  autofocus: true,
-                  maxLines: null,
-                  decoration: InputDecoration(
-                    hintText: context.loc.start_typing_your_note
-                  ) 
+                child: Column(
+                  children: [
+                    Text('${context.loc.last_access} $time'),
+                    TextField(
+                      controller: _textController,
+                      keyboardType: TextInputType.multiline,
+                      autofocus: true,
+                      maxLines: null,
+                      decoration: InputDecoration(
+                        hintText: context.loc.start_typing_your_note
+                      ) 
+                    ),
+                  ],
                 ),
               );
             default:

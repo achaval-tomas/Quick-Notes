@@ -13,9 +13,12 @@
     "login": "Iniciar Sesión",
     "title": "Quick Notes",
     "verify_email": "Verificación de Email",
+    "create_user": "Crear Usuario",
     "register": "Registrarme",
     "restart": "Volver",
     "generic_loading_text": "Espera un momento...",
+
+    "last_access": "Último Acceso:",
 
     "start_typing_your_note": "Comienza a escribir tu nota...",
     "delete_note_prompt": "Estas seguro de que deseas eliminar esta nota?",

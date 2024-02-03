@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mynotes/constants/regex.dart';
 import 'package:mynotes/services/cloud/cloud_note.dart';
 import 'package:mynotes/services/cloud/cloud_storage_constants.dart';
 import 'package:mynotes/services/cloud/cloud_storage_exceptions.dart';
@@ -11,16 +12,23 @@ class FirebaseCloudStorage {
       FirebaseCloudStorage._sharedInstance();
   factory FirebaseCloudStorage() => _shared;
 
+  String _updateNoteTime(String note){
+    final time = getDate(null);
+    final text = getContent(note);
+    return time + text;
+  }
+
   Future<CloudNote> createNewNote({required String ownerUserId}) async {
+    final text = _updateNoteTime('');
     final document = await notes.add({
       ownerUserIdFieldName: ownerUserId,
-      textFieldName: '',
+      textFieldName: text,
     });
     final fetchedNote = await document.get();
     return CloudNote(
       documentId: fetchedNote.id,
       ownerUserId: ownerUserId,
-      text: ''
+      text: text
     );
   }
 
@@ -45,10 +53,10 @@ class FirebaseCloudStorage {
 
   Future<void> updateNote({
     required String documentId,
-    required String text
+    required String text,
   }) async {
     try {
-      await notes.doc(documentId).update({textFieldName: text});
+      await notes.doc(documentId).update({textFieldName: _updateNoteTime(text)});
     } catch (e) {
       throw CouldNotUpdateNoteException();
     }
