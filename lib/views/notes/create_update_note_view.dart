@@ -60,7 +60,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
     }
   }
 
-  void _textControllerListener() async {
+ /* void _textControllerListener() async {
     final note = _note;
     if (note == null) return;
     final text = _textController.text.trimLeft();
@@ -73,7 +73,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
   void _setupTextControllerListener() {
     _textController.removeListener(_textControllerListener);
     _textController.addListener(_textControllerListener);
-  }
+  }*/
 
   @override
   void initState() {
@@ -121,7 +121,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
           String time = getDate(_note?.text);
           switch (snapshot.connectionState){
             case ConnectionState.done:
-              _setupTextControllerListener();
+             // _setupTextControllerListener();
               return Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Column(
