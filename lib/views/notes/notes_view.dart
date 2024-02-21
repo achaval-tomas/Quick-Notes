@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show ReadContext;
-import 'package:mynotes/constants/regex.dart';
+import 'package:mynotes/helpers/date_handlers.dart';
 import 'package:mynotes/constants/routes.dart';
 import 'package:mynotes/enums/menu_action.dart';
 import 'package:mynotes/extensions/buildcontext/loc.dart';
@@ -42,7 +42,6 @@ class _NotesViewState extends State<NotesView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.notes),
         title: StreamBuilder(
           stream: _notesService.allNotes(ownerUserId: userId).getLength,
           builder: (context, AsyncSnapshot<int> snapshot) {

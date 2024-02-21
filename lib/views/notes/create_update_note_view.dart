@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mynotes/constants/regex.dart';
+import 'package:mynotes/helpers/date_handlers.dart';
 import 'package:mynotes/extensions/buildcontext/loc.dart';
 import 'package:mynotes/services/auth/auth_service.dart';
 import 'package:mynotes/utilities/dialogs/cannot_share_empty_note_dialog.dart';
@@ -118,7 +118,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
       body: FutureBuilder(
         future: createOrGetExistingNote(context),
         builder:(context, snapshot) {
-          String time = getCreationDate(_note?.text);
+          String time = getCreationDate(_note?.text).substring(0, 16);
           switch (snapshot.connectionState){
             case ConnectionState.done:
              // _setupTextControllerListener();

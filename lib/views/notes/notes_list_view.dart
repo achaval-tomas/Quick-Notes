@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mynotes/constants/regex.dart';
+import 'package:mynotes/helpers/date_handlers.dart';
 import 'package:mynotes/services/cloud/cloud_note.dart';
 import 'package:mynotes/utilities/dialogs/delete_dialog.dart';
 
@@ -48,7 +48,7 @@ class NotesListView extends StatelessWidget {
               overflow: TextOverflow.ellipsis
             ),
             subtitle: Text(
-              sortFunc(note.text),
+              sortFunc(note.text).substring(0, 16),
               maxLines: 1,
               softWrap: true,
               style: const TextStyle(color: Colors.white24),
