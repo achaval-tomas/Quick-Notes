@@ -7,14 +7,14 @@ Wish to delete your account?
 Send us an email with the subject "DELETE MY ACCOUNT - QUICK NOTES" from your currently registered email account to tomiachaval2013@gmail.com
 
 ## Some In-App Screenshots
-<img src="https://github.com/achaval-tomas/Quick-Notes/assets/134091945/53e12211-6833-4ff7-a84e-e62f6f6cf846" width="150">
-<img src="https://github.com/achaval-tomas/Quick-Notes/assets/134091945/34a08660-de4d-4204-82ab-c8ef8ccc1e2b" width="150">
-<img src="https://github.com/achaval-tomas/Quick-Notes/assets/134091945/55532f7c-8f43-4762-9946-a96ca3943e4a" width="150">
-<img src="https://github.com/achaval-tomas/Quick-Notes/assets/134091945/9cbbbc26-6a77-471f-801b-33f968a9f900" width="150">
-<img src="https://github.com/achaval-tomas/Quick-Notes/assets/134091945/b8620b12-1a7f-41ff-9ec2-b4ed7df714df" width="150">
+<img src="https://github.com/achaval-tomas/Quick-Notes/assets/134091945/6855e37e-345b-48db-8c16-9e94fe8cf1f4" width="150">
+<img src="https://github.com/achaval-tomas/Quick-Notes/assets/134091945/f119d411-28bf-4eb2-8b29-3b84e4368c7d" width="150">
+<img src="https://github.com/achaval-tomas/Quick-Notes/assets/134091945/7dc9eacc-4b6e-4bfe-b312-8d19b62bfa09" width="150">
+<img src="https://github.com/achaval-tomas/Quick-Notes/assets/134091945/69b7c997-6a61-4bba-8088-42c3ed739ba6" width="150">
+<img src="https://github.com/achaval-tomas/Quick-Notes/assets/134091945/12745084-859f-4021-8b2a-cb515c546cc7" width="150">
 
-<!--![Screenshot_1706192717](https://github.com/achaval-tomas/Quick-Notes/assets/134091945/53e12211-6833-4ff7-a84e-e62f6f6cf846)
-![Screenshot_1706192952](https://github.com/achaval-tomas/Quick-Notes/assets/134091945/34a08660-de4d-4204-82ab-c8ef8ccc1e2b)
-![Screenshot_1706192968](https://github.com/achaval-tomas/Quick-Notes/assets/134091945/55532f7c-8f43-4762-9946-a96ca3943e4a)
-![Screenshot_1706193008](https://github.com/achaval-tomas/Quick-Notes/assets/134091945/9cbbbc26-6a77-471f-801b-33f968a9f900)
-![Screenshot_1706192982](https://github.com/achaval-tomas/Quick-Notes/assets/134091945/b8620b12-1a7f-41ff-9ec2-b4ed7df714df) --!>
+<!-- ![Untitled (3)](https://github.com/achaval-tomas/Quick-Notes/assets/134091945/6855e37e-345b-48db-8c16-9e94fe8cf1f4)
+![Untitled (2)](https://github.com/achaval-tomas/Quick-Notes/assets/134091945/f119d411-28bf-4eb2-8b29-3b84e4368c7d)
+![Untitled (6)](https://github.com/achaval-tomas/Quick-Notes/assets/134091945/7dc9eacc-4b6e-4bfe-b312-8d19b62bfa09)
+![Untitled (5)](https://github.com/achaval-tomas/Quick-Notes/assets/134091945/69b7c997-6a61-4bba-8088-42c3ed739ba6)
+![Untitled (4)](https://github.com/achaval-tomas/Quick-Notes/assets/134091945/12745084-859f-4021-8b2a-cb515c546cc7)
