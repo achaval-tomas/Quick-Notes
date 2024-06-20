@@ -124,19 +124,21 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
              // _setupTextControllerListener();
               return Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  children: [
-                    Text('${context.loc.created_at} $time'),
-                    TextField(
-                      controller: _textController,
-                      keyboardType: TextInputType.multiline,
-                      autofocus: true,
-                      maxLines: null,
-                      decoration: InputDecoration(
-                        hintText: context.loc.start_typing_your_note
-                      ) 
-                    ),
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Text('${context.loc.created_at} $time'),
+                      TextField(
+                        controller: _textController,
+                        keyboardType: TextInputType.multiline,
+                        autofocus: true,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                          hintText: context.loc.start_typing_your_note
+                        ) 
+                      ),
+                    ],
+                  ),
                 ),
               );
             default:
