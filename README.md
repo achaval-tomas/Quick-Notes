@@ -1,7 +1,7 @@
 # My Notes
 ![](https://github.com/achaval-tomas/Quick-Notes/assets/134091945/5e365ef1-c7cf-42a5-b868-c5f34cb63bd2)
 
-My first Flutter App for iOS and Android,
+My first Flutter App for iOS and Android. [**Available on Google Play.**](https://play.google.com/store/apps/details?id=com.myfirstproject.mynotes)
 
 Wish to delete your account?
 Send us an email with the subject "DELETE MY ACCOUNT - QUICK NOTES" from your currently registered email account to tomiachaval2013@gmail.com
